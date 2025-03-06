@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    background-image: url('images/cartoon1.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.chat-container {
+    width: 90%;
+    max-width: 500px;
+    height: 80vh;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    border: 3px solid rgba(255, 105, 180, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.chat-header {
+    background-color: rgba(255, 105, 180, 0.8);
+    padding: 15px;
+    color: white;
+    text-align: center;
+    border-bottom: 3px solid rgba(255, 91, 167, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.anime-girl-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid white;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background-image: url('images/cartoon2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* 添加暗色调半透明遮罩 */
+.chat-messages::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 1;
+}
+
+/* 确保消息显示在遮罩层上方 */
+.message {
+    margin-bottom: 20px;
+    display: flex;
+    position: relative;
+    z-index: 2;
+}
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.message.anime-girl {
+    justify-content: flex-start;
+}
+
+.message-bubble {
+    max-width: 80%;
+    padding: 12px 20px;
+    border-radius: 20px;
+    position: relative;
+    word-wrap: break-word;
+    animation: pop-in 0.3s ease-out forwards;
+}
+
+/* 调整消息气泡样式以配合暗色调背景 */
+.anime-girl .message-bubble {
+    background-color: rgba(40, 40, 40, 0.85);
+    color: #ffb6c1;
+    border: 2px solid rgba(169, 169, 169, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.anime-girl .message-bubble::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    bottom: 0;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(40, 40, 40, 0.85);
+    border-left: 2px solid rgba(169, 169, 169, 0.8);
+    border-bottom: 2px solid rgba(169, 169, 169, 0.8);
+    clip-path: polygon(100% 0, 0 100%, 100% 100%);
+}
+
+.user .message-bubble {
+    background-color: rgba(60, 60, 60, 0.85);
+    color: #87ceeb;
+    border: 2px solid rgba(135, 206, 235, 0.6);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.user .message-bubble::before {
+    content: '';
+    position: absolute;
+    right: -10px;
+    bottom: 0;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(60, 60, 60, 0.85);
+    border-right: 2px solid rgba(135, 206, 235, 0.6);
+    border-bottom: 2px solid rgba(135, 206, 235, 0.6);
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+}
+
+/* 调整输入框样式 */
+.chat-input {
+    padding: 15px;
+    display: flex;
+    background-color: rgba(30, 30, 30, 0.9);
+    border-top: 3px solid rgba(169, 169, 169, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+#messageInput {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid rgba(169, 169, 169, 0.5);
+    border-radius: 30px;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 16px;
+    background-color: rgba(50, 50, 50, 0.9);
+    color: #fff;
+    outline: none;
+}
+
+#messageInput::placeholder {
+    color: rgba(169, 169, 169, 0.8);
+}
+
+#sendButton {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: rgba(80, 80, 80, 0.9);
+    color: white;
+    border: 2px solid rgba(169, 169, 169, 0.5);
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+#sendButton:hover {
+    background-color: rgba(100, 100, 100, 1);
+    border-color: rgba(169, 169, 169, 0.8);
+}
+
+.anime-girl-image {
+    position: absolute;
+    bottom: -50px;
+    right: -30px;
+    z-index: 1;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.anime-girl-image img {
+    width: 400px;
+    max-width: 50vw;
+}
+
+@keyframes pop-in {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .chat-container {
+        width: 95%;
+        height: 85vh;
+    }
+    
+    .anime-girl-image img {
+        width: 300px;
+    }
+    
+    .anime-girl-image {
+        right: -80px;
+        bottom: -30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .anime-girl-image {
+        opacity: 0.4;
+    }
+} 
